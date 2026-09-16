@@ -1,0 +1,1 @@
+- [Frontend archive imports](archive-imports.md) — regenerate stale locks and resolve missing peer dependencies while preserving artifact runtime configuration.
