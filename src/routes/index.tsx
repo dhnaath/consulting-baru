@@ -1,263 +1,147 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useQueries } from "@tanstack/react-query";
-import { ArrowUpRight, Briefcase, CalendarClock, TrendingUp, Users, Wallet } from "lucide-react";
-import { AppShell } from "@/components/app-shell";
-import { Bar, Kosong, Panel, Pill } from "@/components/ui-bits";
-import {
-  activitiesQuery,
-  clientsQuery,
-  deliverablesQuery,
-  projectsQuery,
-  rupiahRingkas,
-  sisaHari,
-  statusTugas,
-  tanggal,
-  tasksQuery,
-  waktuRelatif,
-} from "@/lib/data";
+import { AppShell } from "../components/app-shell";
+import { navKonsultan } from "../config/nav";
+import { useState, useRef, useEffect, useMemo } from "react";
+import { Search } from "lucide-react";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Dashboard Eksekutif — Client OS Konsultan Manajemen" },
-      {
-        name: "description",
-        content:
-          "Pantau portofolio klien, proyek, tugas, dan deliverable praktik konsultansi manajemen dalam satu dashboard operasional.",
-      },
-      { property: "og:title", content: "Dashboard Eksekutif — Client OS Konsultan" },
-      {
-        property: "og:description",
-        content: "Ringkasan klien aktif, proyek berjalan, tenggat tugas, dan aktivitas terbaru.",
-      },
-    ],
-  }),
-  component: Dashboard,
+  component: Launcher,
 });
 
-function Dashboard() {
-  const [clients, projects, tasks, deliverables, activities] = useQueries({
-    queries: [clientsQuery, projectsQuery, tasksQuery, deliverablesQuery, activitiesQuery],
-  });
+const gradients = [
+  "bg-gradient-to-br from-blue-400 to-blue-600",
+  "bg-gradient-to-br from-green-400 to-green-600",
+  "bg-gradient-to-br from-purple-400 to-purple-600",
+  "bg-gradient-to-br from-orange-400 to-orange-600",
+  "bg-gradient-to-br from-pink-400 to-pink-600",
+  "bg-gradient-to-br from-indigo-400 to-indigo-600",
+  "bg-gradient-to-br from-teal-400 to-teal-600",
+  "bg-gradient-to-br from-rose-400 to-rose-600",
+  "bg-gradient-to-br from-amber-400 to-amber-600",
+  "bg-gradient-to-br from-cyan-400 to-cyan-600",
+  "bg-gradient-to-br from-violet-400 to-violet-600",
+  "bg-gradient-to-br from-fuchsia-400 to-fuchsia-600",
+  "bg-gradient-to-br from-emerald-400 to-emerald-600",
+  "bg-gradient-to-br from-sky-400 to-sky-600",
+  "bg-gradient-to-br from-red-400 to-red-600",
+  "bg-gradient-to-br from-slate-600 to-slate-800",
+];
 
-  const daftarKlien = clients.data ?? [];
-  const daftarProyek = projects.data ?? [];
-  const daftarTugas = tasks.data ?? [];
-  const daftarDeliv = deliverables.data ?? [];
-
-  const klienAktif = daftarKlien.filter((k) => k.status === "aktif").length;
-  const proyekBerjalan = daftarProyek.filter((p) => p.status === "berjalan");
-  const nilaiAktif = proyekBerjalan.reduce((a, p) => a + Number(p.nilai), 0);
-  const tugasTerbuka = daftarTugas.filter((t) => t.status !== "selesai");
-  const jatuhTempo = tugasTerbuka
-    .filter((t) => t.tenggat)
-    .sort((a, b) => (a.tenggat! < b.tenggat! ? -1 : 1))
-    .slice(0, 6);
-  const utilisasi = proyekBerjalan.length
-    ? Math.round(proyekBerjalan.reduce((a, p) => a + p.progres, 0) / proyekBerjalan.length)
-    : 0;
-
-  const namaKlien = (id: string | null) => daftarKlien.find((k) => k.id === id)?.nama ?? "Internal";
-  const namaProyek = (id: string | null) => daftarProyek.find((p) => p.id === id)?.nama ?? "—";
-
-  return (
-    <AppShell
-      title="Dashboard Eksekutif"
-      subtitle="Ringkasan portofolio praktik konsultansi manajemen Anda"
-    >
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <Metrik
-          ikon={<Users className="size-4" />}
-          label="Klien aktif"
-          nilai={`${klienAktif}`}
-          catatan={`${daftarKlien.length} total klien terdaftar`}
-        />
-        <Metrik
-          ikon={<Briefcase className="size-4" />}
-          label="Proyek berjalan"
-          nilai={`${proyekBerjalan.length}`}
-          catatan={`${daftarProyek.length} proyek dalam portofolio`}
-        />
-        <Metrik
-          ikon={<Wallet className="size-4" />}
-          label="Nilai proyek berjalan"
-          nilai={rupiahRingkas(nilaiAktif)}
-          catatan="Kontrak yang sedang dieksekusi"
-        />
-        <Metrik
-          ikon={<TrendingUp className="size-4" />}
-          label="Rata-rata progres"
-          nilai={`${utilisasi}%`}
-          catatan={`${tugasTerbuka.length} tugas masih terbuka`}
-        />
-      </div>
-
-      <div className="mt-6 grid gap-6 xl:grid-cols-3">
-        <Panel
-          className="xl:col-span-2"
-          title="Proyek prioritas"
-          aksi={
-            <Link to="/proyek" className="text-xs font-medium text-primary hover:underline">
-              Lihat semua
-            </Link>
-          }
-        >
-          {proyekBerjalan.length === 0 ? (
-            <Kosong pesan="Belum ada proyek berjalan." />
-          ) : (
-            <div className="space-y-4">
-              {proyekBerjalan.slice(0, 5).map((p) => (
-                <div key={p.id} className="space-y-2">
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    <div>
-                      <p className="text-sm font-medium">{p.nama}</p>
-                      <p className="text-xs text-muted-foreground">
-                        {namaKlien(p.client_id)} · {p.konsultan} · target{" "}
-                        {tanggal(p.tanggal_selesai)}
-                      </p>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Pill value={p.prioritas} />
-                      <span className="text-xs font-medium tabular-nums">{p.progres}%</span>
-                    </div>
-                  </div>
-                  <Bar value={p.progres} />
-                </div>
-              ))}
-            </div>
-          )}
-        </Panel>
-
-        <Panel
-          title="Tenggat terdekat"
-          aksi={
-            <Link to="/tugas" className="text-xs font-medium text-primary hover:underline">
-              Semua tugas
-            </Link>
-          }
-        >
-          {jatuhTempo.length === 0 ? (
-            <Kosong pesan="Tidak ada tenggat dalam antrean." />
-          ) : (
-            <ul className="space-y-3">
-              {jatuhTempo.map((t) => {
-                const sisa = sisaHari(t.tenggat);
-                return (
-                  <li key={t.id} className="flex items-start gap-3">
-                    <CalendarClock className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
-                    <div className="min-w-0 flex-1">
-                      <p className="truncate text-sm font-medium">{t.judul}</p>
-                      <p className="truncate text-xs text-muted-foreground">
-                        {namaProyek(t.project_id)}
-                      </p>
-                    </div>
-                    <span
-                      className={
-                        sisa !== null && sisa < 0
-                          ? "text-xs font-medium text-destructive"
-                          : "text-xs text-muted-foreground"
-                      }
-                    >
-                      {sisa === null
-                        ? "—"
-                        : sisa < 0
-                          ? `telat ${Math.abs(sisa)} hr`
-                          : `${sisa} hr lagi`}
-                    </span>
-                  </li>
-                );
-              })}
-            </ul>
-          )}
-        </Panel>
-      </div>
-
-      <div className="mt-6 grid gap-6 xl:grid-cols-3">
-        <Panel title="Status tugas" className="xl:col-span-1">
-          <ul className="space-y-3">
-            {Object.entries(statusTugas).map(([key, label]) => {
-              const jumlah = daftarTugas.filter((t) => t.status === key).length;
-              const persen = daftarTugas.length ? (jumlah / daftarTugas.length) * 100 : 0;
-              return (
-                <li key={key} className="space-y-1.5">
-                  <div className="flex items-center justify-between text-sm">
-                    <span>{label}</span>
-                    <span className="tabular-nums text-muted-foreground">{jumlah}</span>
-                  </div>
-                  <Bar value={persen} />
-                </li>
-              );
-            })}
-          </ul>
-        </Panel>
-
-        <Panel title="Deliverable menunggu" className="xl:col-span-1">
-          {daftarDeliv.filter((d) => d.status !== "disetujui").length === 0 ? (
-            <Kosong pesan="Semua deliverable sudah disetujui." />
-          ) : (
-            <ul className="space-y-3">
-              {daftarDeliv
-                .filter((d) => d.status !== "disetujui")
-                .slice(0, 6)
-                .map((d) => (
-                  <li key={d.id} className="flex items-start justify-between gap-3">
-                    <div className="min-w-0">
-                      <p className="truncate text-sm font-medium">{d.judul}</p>
-                      <p className="truncate text-xs text-muted-foreground">
-                        {namaProyek(d.project_id)} · {d.versi} · {tanggal(d.jatuh_tempo)}
-                      </p>
-                    </div>
-                    <Pill value={d.status} />
-                  </li>
-                ))}
-            </ul>
-          )}
-        </Panel>
-
-        <Panel title="Aktivitas terbaru" className="xl:col-span-1">
-          {(activities.data ?? []).length === 0 ? (
-            <Kosong pesan="Belum ada aktivitas." />
-          ) : (
-            <ol className="relative space-y-4 border-l border-border pl-4">
-              {(activities.data ?? []).slice(0, 6).map((a) => (
-                <li key={a.id} className="relative">
-                  <span className="absolute -left-[21px] top-1.5 size-2 rounded-full bg-primary" />
-                  <p className="text-sm font-medium">{a.judul}</p>
-                  <p className="text-xs text-muted-foreground">
-                    {namaKlien(a.client_id)} · {waktuRelatif(a.waktu)}
-                  </p>
-                </li>
-              ))}
-            </ol>
-          )}
-        </Panel>
-      </div>
-    </AppShell>
-  );
+function getGradient(name: string) {
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) {
+    hash = name.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  return gradients[Math.abs(hash) % gradients.length];
 }
 
-function Metrik({
-  ikon,
-  label,
-  nilai,
-  catatan,
-}: {
-  ikon: React.ReactNode;
-  label: string;
-  nilai: string;
-  catatan: string;
-}) {
+function Launcher() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [currentPage, setCurrentPage] = useState(0);
+
+  const pages = useMemo(() => {
+    return navKonsultan
+      .map((group) => ({
+        ...group,
+        items: group.items.filter((item) => item.to !== "/"),
+      }))
+      .filter((group) => group.items.length > 0);
+  }, []);
+
+  // Handle scroll to update current page
+  useEffect(() => {
+    const handleScroll = () => {
+      if (scrollRef.current) {
+        const { scrollLeft, clientWidth } = scrollRef.current;
+        const page = Math.round(scrollLeft / clientWidth);
+        setCurrentPage(page);
+      }
+    };
+    const el = scrollRef.current;
+    if (el) {
+      el.addEventListener("scroll", handleScroll, { passive: true });
+    }
+    return () => {
+      if (el) el.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const scrollToPage = (pageIndex: number) => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTo({
+        left: pageIndex * scrollRef.current.clientWidth,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
-    <div className="rounded-2xl border border-border bg-card p-5">
-      <div className="flex items-center justify-between">
-        <span className="flex size-8 items-center justify-center rounded-lg bg-accent text-foreground">
-          {ikon}
-        </span>
-        <ArrowUpRight className="size-4 text-muted-foreground" />
+    <AppShell title="Launcher" subtitle="Aplikasi">
+      <div className="flex-1 flex flex-col h-[calc(100vh-140px)] relative overflow-hidden bg-background/50">
+        
+
+
+        {/* Pages Container */}
+        <div 
+          ref={scrollRef}
+          className="flex-1 overflow-x-auto overflow-y-hidden snap-x snap-mandatory flex [hide-scrollbar::-webkit-scrollbar]:hidden"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        >
+          {pages.length > 0 ? pages.map((page, pageIdx) => (
+            <div 
+              key={pageIdx} 
+              className="w-full h-full shrink-0 snap-center flex-none px-4 sm:px-8 md:px-12 lg:px-24 pb-12 pt-8 overflow-y-auto flex flex-col items-center"
+            >
+              <h3 className="text-xl sm:text-2xl font-bold text-foreground/70 mb-8 tracking-tight">
+                {page.title}
+              </h3>
+              <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-7 gap-x-4 gap-y-8 place-items-start max-w-6xl mx-auto w-full">
+                {page.items.map((item) => {
+                  const gradient = getGradient(item.label);
+                  return (
+                    <Link
+                      key={item.to}
+                      to={item.to}
+                      className="flex flex-col items-center gap-2 group w-full outline-none"
+                    >
+                      <div 
+                        className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl sm:rounded-[1.25rem] flex items-center justify-center text-white shadow-sm transition-transform duration-200 group-hover:scale-110 group-active:scale-95 ${gradient}`}
+                      >
+                        <item.icon className="size-7 sm:size-8 opacity-90 drop-shadow-sm" strokeWidth={1.5} />
+                      </div>
+                      <span className="text-xs sm:text-sm text-foreground/90 font-medium text-center line-clamp-2 leading-tight px-1 group-hover:text-foreground">
+                        {item.label}
+                      </span>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          )) : (
+            <div className="w-full flex items-center justify-center text-muted-foreground">
+              No applications found.
+            </div>
+          )}
+        </div>
+
+        {/* Pagination Dots */}
+        {pages.length > 1 && (
+          <div className="absolute bottom-10 left-0 right-0 flex justify-center gap-2 pb-2">
+            {pages.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => scrollToPage(idx)}
+                className={`size-2 rounded-full transition-all duration-300 ${
+                  currentPage === idx ? "bg-primary w-3" : "bg-primary/30 hover:bg-primary/50"
+                }`}
+                aria-label={`Go to page ${idx + 1}`}
+              />
+            ))}
+          </div>
+        )}
+
       </div>
-      <p className="mt-4 text-2xl font-semibold tracking-tight">{nilai}</p>
-      <p className="text-sm font-medium text-foreground">{label}</p>
-      <p className="mt-1 text-xs text-muted-foreground">{catatan}</p>
-    </div>
+    </AppShell>
   );
 }

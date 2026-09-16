@@ -120,7 +120,7 @@ export const navKonsultan: NavGroup[] = [
   {
     title: "Overview",
     items: [
-      { to: "/", label: "Dashboard", icon: LayoutDashboard },
+      { to: "/", label: "Launcher", icon: LayoutDashboard },
       { to: "/insider", label: "Insider", icon: Eye },
       { to: "/insight", label: "Insight", icon: Lightbulb },
       { to: "/outward", label: "Outward", icon: Compass },

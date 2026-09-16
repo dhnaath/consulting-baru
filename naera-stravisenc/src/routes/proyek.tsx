@@ -3,6 +3,7 @@ import { useQueries } from "@tanstack/react-query";
 import { useState } from "react";
 import { AppShell } from "@/components/app-shell";
 import { Bar, Kosong, Panel, Pill } from "@/components/ui-bits";
+import { CustomWorkspaceSection } from "@/components/CustomWorkspaceSection";
 import { cn } from "@/lib/utils";
 import {
   clientsQuery,
@@ -66,7 +67,9 @@ function HalamanProyek() {
         </div>
       }
     >
-      {daftar.length === 0 ? (
+      <div className="flex flex-col xl:flex-row gap-6 h-full items-start">
+        <div className="flex-1 w-full">
+          {daftar.length === 0 ? (
         <Kosong pesan="Tidak ada proyek pada filter ini." />
       ) : (
         <div className="grid gap-4 lg:grid-cols-2">
@@ -115,6 +118,13 @@ function HalamanProyek() {
           })}
         </div>
       )}
+      
+      </div>
+        
+        <div className="w-full xl:w-[300px] shrink-0 sticky top-6 h-[calc(100vh-8rem)]">
+          <CustomWorkspaceSection />
+        </div>
+      </div>
     </AppShell>
   );
 }

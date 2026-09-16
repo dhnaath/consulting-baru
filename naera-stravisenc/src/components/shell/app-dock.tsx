@@ -1,7 +1,7 @@
 import { useRef, useMemo } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { Target } from "lucide-react";
+import { Target, LayoutDashboard, CalendarDays } from "lucide-react";
 import { useFavorites } from "@/hooks/useFavorites";
 import { navKonsultan } from "@/config/nav";
 
@@ -65,19 +65,28 @@ export function AppDock() {
   const { favorites } = useFavorites();
 
   const dockItems = useMemo(() => {
-    if (favorites.length === 0) return [];
-    
     // Create a flat map of all available navigation items
     const allItems = navKonsultan.flatMap(group => group.items);
     
     // Map favorite paths to their respective item configuration
-    return favorites.map(favPath => {
+    const dynamicItems = favorites.map(favPath => {
       const found = allItems.find(item => item.to === favPath);
       if (found) {
         return { id: found.to, label: found.label, icon: found.icon };
       }
       return { id: favPath, label: favPath, icon: Target }; // Fallback
     });
+    
+    // 2 tombol statis baru
+    const staticItems = [
+      { id: "/", label: "Launcher", icon: LayoutDashboard },
+      { id: "/tasks-calendar", label: "Kalender", icon: CalendarDays },
+    ];
+    
+    // Hilangkan duplikasi jika ternyata tombol statis sudah ada di favorit
+    const filteredDynamic = dynamicItems.filter(di => !staticItems.some(si => si.id === di.id));
+
+    return [...staticItems, ...filteredDynamic];
   }, [favorites]);
 
   if (dockItems.length === 0) return null;

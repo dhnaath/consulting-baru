@@ -112,15 +112,15 @@ export const navKonsultan: NavGroup[] = [
   {
     title: "Proyek",
     items: [
-      { to: "/projects", label: "Daftar Proyek", icon: FolderKanban },
-      { to: "/clients", label: "Klien & Kontak", icon: Users },
+      { to: "/proyek", label: "Daftar Proyek", icon: FolderKanban },
+      { to: "/klien", label: "Klien & Kontak", icon: Users },
       { to: "/reports", label: "Laporan Khusus", icon: NotebookText },
     ],
   },
   {
     title: "Overview",
     items: [
-      { to: "/", label: "Dashboard", icon: LayoutDashboard },
+      { to: "/", label: "Launcher", icon: LayoutDashboard },
       { to: "/insider", label: "Insider", icon: Eye },
       { to: "/insight", label: "Insight", icon: Lightbulb },
       { to: "/outward", label: "Outward", icon: Compass },

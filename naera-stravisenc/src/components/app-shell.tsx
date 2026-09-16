@@ -94,7 +94,6 @@ import { useMenuSettings } from "@/hooks/useMenuSettings";
 import { useFavorites } from "@/hooks/useFavorites";
 import { HeaderBreadcrumb } from "@/components/HeaderBreadcrumb";
 import { useCustomNav } from "@/hooks/useCustomNav";
-import { CustomSidebarSection } from "@/components/CustomSidebarSection";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -234,7 +233,8 @@ export function AppShell({
   const [collapsedNavGroups, setCollapsedNavGroups] = useState<Record<string, boolean>>({});
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-  const [isVersionOpen, setIsVersionOpen] = useState(false);
+  const [isRegionOpen, setIsRegionOpen] = useState(false);
+
   const [activeSettingsTab, setActiveSettingsTab] = useState("general");
   const { favorites, toggleFavorite } = useFavorites();
 
@@ -360,13 +360,6 @@ export function AppShell({
                 )}
               </div>
             )})}
-
-
-          
-            {/* Bagian Bawah Sidebar Kiri: Custom Folder & Menu */}
-            <div className="ml-[5px]">
-              <CustomSidebarSection onItemClick={() => setOpenDrawer(null)} />
-            </div>
           </nav>
         </div>
       </aside>
@@ -378,105 +371,101 @@ export function AppShell({
         <div className="flex-1 min-h-0 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] px-4 py-2 sm:px-6">
           <nav className="flex flex-col gap-4 items-start">
             <div className="flex flex-col gap-3 w-full">
-              <button
-                className="flex h-9 w-full items-center justify-start gap-2 px-3 rounded-lg border border-border bg-background text-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
-                title="Atur Menu"
-                onClick={() => handleOpenSettings("menu")}
-              >
-                <MoreHorizontal className="size-4" /> Atur Menu
-              </button>
-              <button
-                className="flex h-9 w-full items-center justify-start gap-2 px-3 rounded-lg border border-border bg-background text-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
-                title="Pengaturan"
-                onClick={() => handleOpenSettings("general")}
-              >
-                <Settings className="size-4" /> Pengaturan
-              </button>
-              <button
-                type="button"
-                className="flex h-9 w-full relative items-center justify-start gap-2 px-3 rounded-lg border border-border bg-background text-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
-                aria-label="Notifications"
-              >
-                <Bell className="size-4" /> Notifikasi
-                <span className="absolute right-2 top-2 flex h-2 w-2 rounded-full bg-red-500 ring-2 ring-background"></span>
-              </button>
-              <ThemeLangToggle />
 
-              {/* Menu Informasi Versi Aplikasi */}
-              <div className="pt-2 border-t border-border/80 w-full space-y-2">
+
+
+              <ThemeLangToggle />
+              
+              {/* Expandable Region Settings */}
+              <div className="pt-2 border-t border-border/80 w-full">
                 <button
                   type="button"
-                  onClick={() => setIsVersionOpen(!isVersionOpen)}
+                  onClick={() => setIsRegionOpen(!isRegionOpen)}
                   className={`flex h-9 w-full items-center justify-between px-3 rounded-lg border border-border bg-background text-foreground transition-colors hover:bg-accent hover:text-accent-foreground cursor-pointer ${
-                    isVersionOpen ? "!bg-accent font-medium border-primary/30" : ""
+                    isRegionOpen ? "!bg-accent font-medium border-primary/30" : ""
                   }`}
-                  title="Informasi Versi Aplikasi"
+                  title="Region Settings"
                 >
                   <span className="flex items-center gap-2">
-                    <Info className="size-4 text-primary shrink-0" />
-                    <span className="text-sm">Versi Aplikasi</span>
+                    <Globe className="size-4 shrink-0" />
+                    <span className="text-sm">Region</span>
                   </span>
-                  <span className="px-1.5 py-0.5 rounded text-[10px] font-bold font-mono bg-primary/10 text-primary border border-primary/20">
-                    v2.4.2
-                  </span>
+                  <ChevronDown className={`size-4 transition-transform duration-200 ${isRegionOpen ? "rotate-180" : ""}`} />
                 </button>
-
-                {/* Detail Informasi Versi saat diklik */}
-                {isVersionOpen && (
-                  <div className="w-full rounded-xl border border-border bg-muted/40 p-3 text-xs space-y-2.5 animate-in fade-in zoom-in-95 duration-150">
-                    <div className="flex items-center justify-between pb-1.5 border-b border-border/60">
-                      <div className="flex items-center gap-1.5">
-                        <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
-                        <span className="font-semibold text-foreground text-xs">
-                          Client OS Hub
-                        </span>
+                
+                {isRegionOpen && (
+                  <div className="w-full rounded-xl border border-border bg-muted/20 p-3 mt-2 animate-in fade-in zoom-in-95 duration-150">
+                    <div className="space-y-3">
+                      <div className="space-y-1.5">
+                        <label className="text-xs font-medium text-foreground">Country / Region</label>
+                        <select className="w-full px-2.5 py-1.5 bg-background border border-border rounded-md outline-none focus:ring-1 focus:ring-primary text-xs appearance-none">
+                          <option>United States</option>
+                          <option>Indonesia</option>
+                          <option>United Kingdom</option>
+                          <option>Australia</option>
+                          <option>Singapore</option>
+                        </select>
                       </div>
-                      <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-600 font-medium">
-                        Aktif
-                      </span>
-                    </div>
-
-                    <div className="space-y-1.5 text-[11px] text-muted-foreground">
-                      <div className="flex justify-between items-center">
-                        <span>Nomor Versi</span>
-                        <span className="font-mono font-semibold text-foreground">v2.4.2</span>
+                      <div className="space-y-1.5">
+                        <label className="text-xs font-medium text-foreground">City</label>
+                        <input
+                          type="text"
+                          placeholder="e.g. Jakarta"
+                          className="w-full px-2.5 py-1.5 bg-background border border-border rounded-md outline-none focus:ring-1 focus:ring-primary text-xs"
+                        />
                       </div>
-                      <div className="flex justify-between items-center">
-                        <span>Rilis Build</span>
-                        <span className="font-mono text-foreground">2026.09-stable</span>
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <span>Kanal Pembaruan</span>
-                        <span className="text-foreground">Production</span>
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <span>Sinkronisasi</span>
-                        <span className="text-emerald-500 font-medium flex items-center gap-1">
-                          ✓ Terverifikasi
-                        </span>
+                      <div className="space-y-1.5">
+                        <label className="text-xs font-medium text-foreground">Timezone</label>
+                        <select className="w-full px-2.5 py-1.5 bg-background border border-border rounded-md outline-none focus:ring-1 focus:ring-primary text-xs appearance-none">
+                          <option>(UTC-08:00) Pacific Time</option>
+                          <option>(UTC+07:00) WIB</option>
+                          <option>(UTC+08:00) WITA</option>
+                          <option>(UTC+09:00) WIT</option>
+                          <option>(UTC+00:00) UTC</option>
+                        </select>
                       </div>
                     </div>
                   </div>
                 )}
               </div>
-            </div>
+
+                          </div>
           </nav>
         </div>
-
+        
         {/* Footer Informasi Versi Ringkas di Bawah Sidebar Kanan */}
-        <div className="p-4 border-t border-border mt-auto shrink-0 bg-background/50">
-          <div className="flex items-center justify-between text-[11px] text-muted-foreground">
-            <div className="flex items-center gap-1.5">
-              <span className="size-2 rounded-full bg-emerald-500" />
-              <span className="font-medium text-foreground">Client OS</span>
+        <div className="p-4 mt-auto shrink-0">
+          <div className="w-full rounded-xl border border-border bg-muted/40 p-3 flex flex-col gap-2.5">
+            <div className="flex items-center justify-between pb-1.5 border-b border-border/60">
+              <div className="flex items-center gap-1.5">
+                <span className="size-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)] animate-pulse" />
+                <span className="font-semibold text-foreground text-xs">Client OS</span>
+              </div>
+              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-600 font-medium">
+                Aktif
+              </span>
             </div>
-            <span className="font-mono px-1.5 py-0.5 rounded bg-muted text-[10px] font-semibold text-muted-foreground">
-              v2.4.2
-            </span>
+            <div className="space-y-1.5 text-[11px] text-muted-foreground">
+              <div className="flex justify-between items-center">
+                <span>Nomor Versi</span>
+                <span className="font-mono font-semibold text-foreground">v2.4.2</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span>Rilis Build</span>
+                <span className="font-mono text-foreground">2026.09-stable</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span>Kanal Pembaruan</span>
+                <span className="text-foreground">Production</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span>Sinkronisasi</span>
+                <span className="text-emerald-500 font-medium flex items-center gap-1">
+                  ✓ Terverifikasi
+                </span>
+              </div>
+            </div>
           </div>
-          <p className="text-[10px] text-muted-foreground/70 mt-1">
-            Build 2026.09 • Sistem Terbarui
-          </p>
         </div>
       </aside>
       <main id="mainContent" className={`relative flex flex-1 flex-col overflow-hidden transition-[margin] duration-500 ease-in-out ${openDrawer === "left" ? "ml-[275px]" : openDrawer === "right" ? "mr-[275px]" : "ml-0"}`}>
@@ -525,6 +514,25 @@ export function AppShell({
             {/* Bagian Kanan Header: Switch Profile & Actions */}
             <div className="flex items-center justify-end gap-2 sm:gap-3 min-w-0 flex-1 basis-0">
               {actions}
+
+              <button
+                type="button"
+                className="p-2 text-muted-foreground hover:text-foreground hover:bg-accent rounded-lg shrink-0 flex items-center justify-center transition-colors"
+                title="Pencarian"
+                aria-label="Search"
+              >
+                <Search className="size-5 shrink-0" />
+              </button>
+              <button
+                type="button"
+                className="p-2 relative text-muted-foreground hover:text-foreground hover:bg-accent rounded-lg shrink-0 flex items-center justify-center transition-colors"
+                title="Notifikasi"
+                aria-label="Notifications"
+              >
+                <Bell className="size-5 shrink-0" />
+                <span className="absolute right-2 top-2 flex h-2 w-2 rounded-full bg-red-500 ring-2 ring-background"></span>
+              </button>
+
               <div className="relative">
                 <button
                   type="button"
@@ -540,14 +548,6 @@ export function AppShell({
                   onOpenSettings={handleOpenSettings}
                 />
               </div>
-              <button
-                type="button"
-                className="p-2 text-muted-foreground hover:text-foreground hover:bg-accent rounded-lg shrink-0 flex items-center justify-center transition-colors"
-                title="Pencarian"
-                aria-label="Search"
-              >
-                <Search className="size-5 shrink-0" />
-              </button>
               <button
                 className="p-2 -mr-1 sm:-mr-2 text-muted-foreground hover:text-foreground hover:bg-accent rounded-lg shrink-0 block"
                 onClick={() => setOpenDrawer(openDrawer === "right" ? null : "right")}

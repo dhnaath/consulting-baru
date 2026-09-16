@@ -1,8 +1,6 @@
 import { useState } from "react";
-import { User, Settings, CreditCard, Globe, Moon, LogOut, Menu } from "lucide-react";
+import { User, Settings, CreditCard, Globe, Moon, LogOut } from "lucide-react";
 import { cn } from "../lib/utils";
-import { navKonsultan } from "@/config/nav";
-import { useMenuSettings } from "../hooks/useMenuSettings";
 
 export function ProfileMenu({
   isOpen,
@@ -57,21 +55,13 @@ export function ProfileMenu({
             label="Preferences"
             onClick={() => onOpenSettings("general")}
           />
+
           <ProfileMenuItem
             icon={CreditCard}
             label="Billing & Subscription"
             onClick={() => onOpenSettings("billing")}
           />
-          <ProfileMenuItem
-            icon={Globe}
-            label="Language & Region"
-            onClick={() => onOpenSettings("region")}
-          />
-          <ProfileMenuItem
-            icon={Moon}
-            label="Appearance"
-            onClick={() => onOpenSettings("appearance")}
-          />
+
         </div>
 
         <div className="p-2 border-t border-border">
@@ -145,27 +135,7 @@ export function SettingsModal({
               active={activeTab === "general"}
               onClick={() => setActiveTab("general")}
             />
-            <SettingsTab
-              id="region"
-              icon={Globe}
-              label="Language & Region"
-              active={activeTab === "region"}
-              onClick={() => setActiveTab("region")}
-            />
-            <SettingsTab
-              id="appearance"
-              icon={Moon}
-              label="Appearance"
-              active={activeTab === "appearance"}
-              onClick={() => setActiveTab("appearance")}
-            />
-            <SettingsTab
-              id="menu"
-              icon={Menu}
-              label="Menu Configuration"
-              active={activeTab === "menu"}
-              onClick={() => setActiveTab("menu")}
-            />
+
             <SettingsTab
               id="billing"
               icon={CreditCard}
@@ -187,9 +157,7 @@ export function SettingsModal({
               >
                 <option value="profile">Profile</option>
                 <option value="general">Preferences</option>
-                <option value="region">Language & Region</option>
-                <option value="appearance">Appearance</option>
-                <option value="menu">Menu Configuration</option>
+
                 <option value="billing">Billing</option>
               </select>
             </div>
@@ -205,9 +173,7 @@ export function SettingsModal({
           <div className="flex-1 overflow-y-auto p-6 md:p-8">
             {activeTab === "profile" && <ProfileSettings />}
             {activeTab === "general" && <GeneralSettings />}
-            {activeTab === "region" && <RegionSettings />}
-            {activeTab === "appearance" && <AppearanceSettings />}
-            {activeTab === "menu" && <MenuSettings />}
+
             {activeTab === "billing" && <BillingSettings />}
           </div>
         </div>
@@ -289,92 +255,6 @@ function ProfileSettings() {
   );
 }
 
-function RegionSettings() {
-  return (
-    <div className="max-w-2xl space-y-6">
-      <div>
-        <h3 className="text-lg font-bold text-foreground mb-1">Language & Region</h3>
-        <p className="text-sm text-muted-foreground mb-6">
-          Customize your language, time, and currency formats.
-        </p>
-      </div>
-      <div className="space-y-5">
-        <div className="space-y-1.5">
-          <label className="text-sm font-medium text-card-foreground">Language</label>
-          <select className="w-full px-4 py-2.5 bg-muted/30 border border-border rounded-xl outline-none focus:ring-2 focus:ring-blue-500 focus:bg-card transition-all appearance-none">
-            <option>English (United States)</option>
-            <option>English (United Kingdom)</option>
-            <option>Bahasa Indonesia</option>
-            <option>Spanish</option>
-            <option>French</option>
-          </select>
-        </div>
-        <div className="space-y-1.5">
-          <label className="text-sm font-medium text-card-foreground">Country / Region</label>
-          <select className="w-full px-4 py-2.5 bg-muted/30 border border-border rounded-xl outline-none focus:ring-2 focus:ring-blue-500 focus:bg-card transition-all appearance-none">
-            <option>United States</option>
-            <option>Indonesia</option>
-            <option>United Kingdom</option>
-            <option>Australia</option>
-            <option>Singapore</option>
-          </select>
-        </div>
-        <div className="grid grid-cols-2 gap-4">
-          <div className="space-y-1.5">
-            <label className="text-sm font-medium text-card-foreground">State / Province</label>
-            <input
-              type="text"
-              placeholder="e.g. Jakarta"
-              className="w-full px-4 py-2.5 bg-muted/30 border border-border rounded-xl outline-none focus:ring-2 focus:ring-blue-500 focus:bg-card transition-all"
-            />
-          </div>
-          <div className="space-y-1.5">
-            <label className="text-sm font-medium text-card-foreground">City</label>
-            <input
-              type="text"
-              placeholder="e.g. Central Jakarta"
-              className="w-full px-4 py-2.5 bg-muted/30 border border-border rounded-xl outline-none focus:ring-2 focus:ring-blue-500 focus:bg-card transition-all"
-            />
-          </div>
-        </div>
-        <div className="space-y-1.5">
-          <label className="text-sm font-medium text-card-foreground">Timezone</label>
-          <select className="w-full px-4 py-2.5 bg-muted/30 border border-border rounded-xl outline-none focus:ring-2 focus:ring-blue-500 focus:bg-card transition-all appearance-none">
-            <option>(UTC-08:00) Pacific Time (US & Canada)</option>
-            <option>(UTC+07:00) Western Indonesia Time (WIB)</option>
-            <option>(UTC+08:00) Central Indonesia Time (WITA)</option>
-            <option>(UTC+09:00) Eastern Indonesia Time (WIT)</option>
-            <option>(UTC+00:00) Coordinated Universal Time (UTC)</option>
-          </select>
-        </div>
-        <div className="grid grid-cols-2 gap-4">
-          <div className="space-y-1.5">
-            <label className="text-sm font-medium text-card-foreground">Currency</label>
-            <select className="w-full px-4 py-2.5 bg-muted/30 border border-border rounded-xl outline-none focus:ring-2 focus:ring-blue-500 focus:bg-card transition-all appearance-none">
-              <option>USD ($)</option>
-              <option>IDR (Rp)</option>
-              <option>EUR (€)</option>
-              <option>GBP (£)</option>
-            </select>
-          </div>
-          <div className="space-y-1.5">
-            <label className="text-sm font-medium text-card-foreground">Time Format</label>
-            <select className="w-full px-4 py-2.5 bg-muted/30 border border-border rounded-xl outline-none focus:ring-2 focus:ring-blue-500 focus:bg-card transition-all appearance-none">
-              <option>12-hour (1:00 PM)</option>
-              <option>24-hour (13:00)</option>
-            </select>
-          </div>
-        </div>
-      </div>
-      <div className="pt-4">
-        <button className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-xl shadow-md shadow-blue-600/20 transition-all">
-          Save Preferences
-        </button>
-      </div>
-    </div>
-  );
-}
-
 function GeneralSettings() {
   return (
     <div className="max-w-2xl space-y-6">
@@ -408,43 +288,6 @@ function GeneralSettings() {
   );
 }
 
-function AppearanceSettings() {
-  return (
-    <div className="max-w-2xl space-y-6">
-      <div>
-        <h3 className="text-lg font-bold text-foreground mb-1">Appearance</h3>
-        <p className="text-sm text-muted-foreground mb-6">Customize the look and feel.</p>
-      </div>
-      <div className="grid grid-cols-3 gap-4">
-        <button className="flex flex-col items-center gap-2 p-4 border-2 border-blue-600 rounded-xl bg-muted/30">
-          <div className="w-full h-20 bg-card border border-border rounded shadow-sm flex flex-col">
-            <div className="h-4 bg-muted border-b border-border"></div>
-            <div className="flex-1 flex p-1 gap-1">
-              <div className="w-1/4 h-full bg-muted rounded-sm"></div>
-              <div className="flex-1 bg-muted/30 rounded-sm"></div>
-            </div>
-          </div>
-          <span className="text-sm font-bold text-blue-600">Light</span>
-        </button>
-        <button className="flex flex-col items-center gap-2 p-4 border-2 border-transparent hover:border-border rounded-xl">
-          <div className="w-full h-20 bg-primary border border-primary rounded shadow-sm flex flex-col">
-            <div className="h-4 bg-primary border-b border-primary"></div>
-            <div className="flex-1 flex p-1 gap-1">
-              <div className="w-1/4 h-full bg-primary rounded-sm"></div>
-              <div className="flex-1 bg-primary rounded-sm"></div>
-            </div>
-          </div>
-          <span className="text-sm font-medium text-muted-foreground">Dark</span>
-        </button>
-        <button className="flex flex-col items-center gap-2 p-4 border-2 border-transparent hover:border-border rounded-xl">
-          <div className="w-full h-20 bg-gradient-to-br from-slate-100 to-slate-800 border border-border rounded shadow-sm"></div>
-          <span className="text-sm font-medium text-muted-foreground">System</span>
-        </button>
-      </div>
-    </div>
-  );
-}
-
 function BillingSettings() {
   return (
     <div className="max-w-2xl space-y-6">
@@ -470,49 +313,3 @@ function BillingSettings() {
   );
 }
 
-function MenuSettings() {
-  const { enabledMenus, toggleMenu } = useMenuSettings();
-
-  return (
-    <div className="max-w-3xl space-y-6">
-      <div>
-        <h3 className="text-lg font-bold text-foreground mb-1">Menu Configuration</h3>
-        <p className="text-sm text-muted-foreground mb-6">
-          Customize which sidebar menus are visible to you. Changes are saved automatically.
-        </p>
-      </div>
-
-      <div className="space-y-6 pb-12">
-        {navKonsultan.map((group) => (
-          <div key={group.title} className="space-y-3">
-            <h4 className="font-semibold text-foreground/90 border-b border-border pb-1.5">
-              {group.title}
-            </h4>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {group.items.map((item) => {
-                const isEnabled = enabledMenus[item.to] !== false;
-                return (
-                  <label
-                    key={item.to}
-                    className="flex items-center gap-3 p-3 rounded-xl border border-border bg-muted/20 hover:bg-muted/50 cursor-pointer transition-colors"
-                  >
-                    <input
-                      type="checkbox"
-                      className="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                      checked={isEnabled}
-                      onChange={(e) => toggleMenu(item.to, e.target.checked)}
-                    />
-                    <div className="flex items-center gap-2.5 flex-1 text-sm font-medium">
-                      <item.icon className="w-4 h-4 text-muted-foreground" />
-                      <span>{item.label}</span>
-                    </div>
-                  </label>
-                );
-              })}
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
