@@ -1,0 +1,6 @@
+{
+  "name": "Naera Stravisenc",
+  "description": "Frontend workspace untuk konsultan: klien, proyek, tugas, keuangan, dan alat produktivitas.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
