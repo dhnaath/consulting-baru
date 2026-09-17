@@ -196,3 +196,32 @@
     );
   }
 }
+
+  /* Liquid Glass Dock styling */
+  .liquid-glass-dock {
+    position: relative;
+    isolation: isolate;
+  }
+  .liquid-glass-dock::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    border-radius: inherit;
+    box-shadow: inset 0 0 6px -3px rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0);
+    pointer-events: none;
+  }
+  .liquid-glass-dock::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -3;
+    border-radius: inherit;
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    filter: url(#glass-distortion);
+    -webkit-filter: url(#glass-distortion);
+    isolation: isolate;
+    pointer-events: none;
+  }

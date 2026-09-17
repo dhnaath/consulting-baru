@@ -472,7 +472,7 @@ export function AppShell({
         {openDrawer && (
           <div className="absolute inset-0 z-40 bg-black/40 transition-opacity duration-500" onClick={() => setOpenDrawer(null)} />
         )}
-        <header className="sticky top-0 shrink-0 z-20 bg-background/95 backdrop-blur-md border-b border-border">
+        <header className="absolute top-0 inset-x-0 z-20 bg-white/5 backdrop-blur-[15px] border-b border-white/10 shadow-[0px_4px_21px_-8px_rgba(255,255,255,0.15)] liquid-glass-dock">
           <div className="flex items-center justify-between gap-2 px-3 py-2.5 sm:px-6 sm:py-3">
             {/* Bagian Kiri Header: Breadcrumb & Nav Toggle */}
             <div className="flex items-center gap-1.5 sm:gap-2.5 min-w-0 flex-1 basis-0 justify-start">
@@ -488,18 +488,22 @@ export function AppShell({
               <div className="min-w-0 flex-1 overflow-hidden">
                 <HeaderBreadcrumb
                   className="text-xs"
-                  segments={[
-                    { label: "Home", href: "/" },
-                    ...(categoryName && categoryName !== "Umum"
-                      ? [
-                          {
-                            label: categoryName,
-                            siblings: categorySiblings,
-                          },
+                  segments={
+                    pathname === "/home" || pathname === "/"
+                      ? [{ label: "Home", href: pathname }]
+                      : [
+                          { label: "Home", href: "/" },
+                          ...(categoryName && categoryName !== "Umum"
+                            ? [
+                                {
+                                  label: categoryName,
+                                  siblings: categorySiblings,
+                                },
+                              ]
+                            : []),
+                          { label: displayTitle },
                         ]
-                      : []),
-                    { label: displayTitle },
-                  ]}
+                  }
                 />
               </div>
             </div>
@@ -558,7 +562,7 @@ export function AppShell({
             </div>
           </div>
         </header>
-        <div className="flex-1 overflow-y-auto no-scrollbar px-4 py-6 sm:px-6 sm:py-8 relative z-10">{children}</div><AppDock />
+        <div className="flex-1 overflow-y-auto no-scrollbar px-4 pt-20 pb-28 sm:px-6 sm:pt-24 sm:pb-28 relative z-10">{children}</div><AppDock />
       </main>
     </div>
   );

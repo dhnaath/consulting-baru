@@ -207,6 +207,21 @@ export function CommodityDashboard() {
         />
       </div>
 
+      <div className="flex flex-col sm:flex-row flex-wrap gap-3 mb-6">
+        <a href="https://farmaplus.kemkes.go.id/medicine/search" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium border border-border bg-card rounded-xl hover:bg-accent transition-colors flex-1 sm:flex-none justify-center">
+          <ArrowUpRight className="size-4 text-muted-foreground" />
+          FarmaPlus Kemkes
+        </a>
+        <a href="https://www.bi.go.id/hargapangan/" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium border border-border bg-card rounded-xl hover:bg-accent transition-colors flex-1 sm:flex-none justify-center">
+          <ArrowUpRight className="size-4 text-muted-foreground" />
+          PIHPS Bank Indonesia
+        </a>
+        <a href="https://sp2kp.kemendag.go.id/statistik/tabulasi-harga" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium border border-border bg-card rounded-xl hover:bg-accent transition-colors flex-1 sm:flex-none justify-center">
+          <ArrowUpRight className="size-4 text-muted-foreground" />
+          SP2KP Kemendag
+        </a>
+      </div>
+
       <div className="space-y-4 mb-6">
         <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
           <div className="relative flex-1 max-w-lg">

@@ -39,6 +39,7 @@ import { Route as GoalsRouteImport } from './routes/goals'
 import { Route as GrowRouteImport } from './routes/grow'
 import { Route as HabitsRouteImport } from './routes/habits'
 import { Route as HealthRouteImport } from './routes/health'
+import { Route as HomeRouteImport } from './routes/home'
 import { Route as IdeasRouteImport } from './routes/ideas'
 import { Route as ImprovementRouteImport } from './routes/improvement'
 import { Route as IncotermsRouteImport } from './routes/incoterms'
@@ -67,9 +68,11 @@ import { Route as PaperSecuritiesRouteImport } from './routes/paper-securities'
 import { Route as PasswordsRouteImport } from './routes/passwords'
 import { Route as PhotographyRouteImport } from './routes/photography'
 import { Route as PhysicalCommoditiesRouteImport } from './routes/physical-commodities'
+import { Route as PocketRouteImport } from './routes/pocket'
 import { Route as PodcastsRouteImport } from './routes/podcasts'
 import { Route as PomodoroRouteImport } from './routes/pomodoro'
 import { Route as PortalRouteImport } from './routes/portal'
+import { Route as PouchRouteImport } from './routes/pouch'
 import { Route as ProfilRouteImport } from './routes/profil'
 import { Route as ProyekRouteImport } from './routes/proyek'
 import { Route as ProyekPersonalRouteImport } from './routes/proyek-personal'
@@ -83,10 +86,13 @@ import { Route as SufficentRouteImport } from './routes/sufficent'
 import { Route as SuretyRouteImport } from './routes/surety'
 import { Route as SwotRouteImport } from './routes/swot'
 import { Route as TaskManagerRouteImport } from './routes/task-manager'
-import { Route as TasksCalendarRouteImport } from './routes/tasks-calendar'
+import { Route as TerminalRouteImport } from './routes/terminal'
 import { Route as TripsRouteImport } from './routes/trips'
+import { Route as TrunkRouteImport } from './routes/trunk'
 import { Route as TugasRouteImport } from './routes/tugas'
 import { Route as ValuasiRouteImport } from './routes/valuasi'
+import { Route as VaultRouteImport } from './routes/vault'
+import { Route as WalletRouteImport } from './routes/wallet'
 import { Route as WaterRouteImport } from './routes/water'
 import { Route as WeatherRouteImport } from './routes/weather'
 import { Route as WorkoutsRouteImport } from './routes/workouts'
@@ -255,6 +261,11 @@ const HealthRoute = HealthRouteImport.update({
   path: '/health',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HomeRoute = HomeRouteImport.update({
+  id: '/home',
+  path: '/home',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IdeasRoute = IdeasRouteImport.update({
   id: '/ideas',
   path: '/ideas',
@@ -395,6 +406,11 @@ const PhysicalCommoditiesRoute = PhysicalCommoditiesRouteImport.update({
   path: '/physical-commodities',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PocketRoute = PocketRouteImport.update({
+  id: '/pocket',
+  path: '/pocket',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PodcastsRoute = PodcastsRouteImport.update({
   id: '/podcasts',
   path: '/podcasts',
@@ -408,6 +424,11 @@ const PomodoroRoute = PomodoroRouteImport.update({
 const PortalRoute = PortalRouteImport.update({
   id: '/portal',
   path: '/portal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PouchRoute = PouchRouteImport.update({
+  id: '/pouch',
+  path: '/pouch',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProfilRoute = ProfilRouteImport.update({
@@ -475,14 +496,19 @@ const TaskManagerRoute = TaskManagerRouteImport.update({
   path: '/task-manager',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TasksCalendarRoute = TasksCalendarRouteImport.update({
-  id: '/tasks-calendar',
-  path: '/tasks-calendar',
+const TerminalRoute = TerminalRouteImport.update({
+  id: '/terminal',
+  path: '/terminal',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TripsRoute = TripsRouteImport.update({
   id: '/trips',
   path: '/trips',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrunkRoute = TrunkRouteImport.update({
+  id: '/trunk',
+  path: '/trunk',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TugasRoute = TugasRouteImport.update({
@@ -493,6 +519,16 @@ const TugasRoute = TugasRouteImport.update({
 const ValuasiRoute = ValuasiRouteImport.update({
   id: '/valuasi',
   path: '/valuasi',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VaultRoute = VaultRouteImport.update({
+  id: '/vault',
+  path: '/vault',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WalletRoute = WalletRouteImport.update({
+  id: '/wallet',
+  path: '/wallet',
   getParentRoute: () => rootRouteImport,
 } as any)
 const WaterRoute = WaterRouteImport.update({
@@ -612,6 +648,7 @@ export interface FileRoutesByFullPath {
   '/grow': typeof GrowRoute
   '/habits': typeof HabitsRoute
   '/health': typeof HealthRoute
+  '/home': typeof HomeRoute
   '/ideas': typeof IdeasRoute
   '/improvement': typeof ImprovementRoute
   '/incoterms': typeof IncotermsRoute
@@ -640,9 +677,11 @@ export interface FileRoutesByFullPath {
   '/passwords': typeof PasswordsRoute
   '/photography': typeof PhotographyRoute
   '/physical-commodities': typeof PhysicalCommoditiesRoute
+  '/pocket': typeof PocketRoute
   '/podcasts': typeof PodcastsRoute
   '/pomodoro': typeof PomodoroRoute
   '/portal': typeof PortalRouteWithChildren
+  '/pouch': typeof PouchRoute
   '/profil': typeof ProfilRoute
   '/proyek': typeof ProyekRoute
   '/proyek-personal': typeof ProyekPersonalRoute
@@ -656,10 +695,13 @@ export interface FileRoutesByFullPath {
   '/surety': typeof SuretyRoute
   '/swot': typeof SwotRoute
   '/task-manager': typeof TaskManagerRoute
-  '/tasks-calendar': typeof TasksCalendarRoute
+  '/terminal': typeof TerminalRoute
   '/trips': typeof TripsRoute
+  '/trunk': typeof TrunkRoute
   '/tugas': typeof TugasRoute
   '/valuasi': typeof ValuasiRoute
+  '/vault': typeof VaultRoute
+  '/wallet': typeof WalletRoute
   '/water': typeof WaterRoute
   '/weather': typeof WeatherRoute
   '/workouts': typeof WorkoutsRoute
@@ -709,6 +751,7 @@ export interface FileRoutesByTo {
   '/grow': typeof GrowRoute
   '/habits': typeof HabitsRoute
   '/health': typeof HealthRoute
+  '/home': typeof HomeRoute
   '/ideas': typeof IdeasRoute
   '/improvement': typeof ImprovementRoute
   '/incoterms': typeof IncotermsRoute
@@ -737,8 +780,10 @@ export interface FileRoutesByTo {
   '/passwords': typeof PasswordsRoute
   '/photography': typeof PhotographyRoute
   '/physical-commodities': typeof PhysicalCommoditiesRoute
+  '/pocket': typeof PocketRoute
   '/podcasts': typeof PodcastsRoute
   '/pomodoro': typeof PomodoroRoute
+  '/pouch': typeof PouchRoute
   '/profil': typeof ProfilRoute
   '/proyek': typeof ProyekRoute
   '/proyek-personal': typeof ProyekPersonalRoute
@@ -752,10 +797,13 @@ export interface FileRoutesByTo {
   '/surety': typeof SuretyRoute
   '/swot': typeof SwotRoute
   '/task-manager': typeof TaskManagerRoute
-  '/tasks-calendar': typeof TasksCalendarRoute
+  '/terminal': typeof TerminalRoute
   '/trips': typeof TripsRoute
+  '/trunk': typeof TrunkRoute
   '/tugas': typeof TugasRoute
   '/valuasi': typeof ValuasiRoute
+  '/vault': typeof VaultRoute
+  '/wallet': typeof WalletRoute
   '/water': typeof WaterRoute
   '/weather': typeof WeatherRoute
   '/workouts': typeof WorkoutsRoute
@@ -806,6 +854,7 @@ export interface FileRoutesById {
   '/grow': typeof GrowRoute
   '/habits': typeof HabitsRoute
   '/health': typeof HealthRoute
+  '/home': typeof HomeRoute
   '/ideas': typeof IdeasRoute
   '/improvement': typeof ImprovementRoute
   '/incoterms': typeof IncotermsRoute
@@ -834,9 +883,11 @@ export interface FileRoutesById {
   '/passwords': typeof PasswordsRoute
   '/photography': typeof PhotographyRoute
   '/physical-commodities': typeof PhysicalCommoditiesRoute
+  '/pocket': typeof PocketRoute
   '/podcasts': typeof PodcastsRoute
   '/pomodoro': typeof PomodoroRoute
   '/portal': typeof PortalRouteWithChildren
+  '/pouch': typeof PouchRoute
   '/profil': typeof ProfilRoute
   '/proyek': typeof ProyekRoute
   '/proyek-personal': typeof ProyekPersonalRoute
@@ -850,10 +901,13 @@ export interface FileRoutesById {
   '/surety': typeof SuretyRoute
   '/swot': typeof SwotRoute
   '/task-manager': typeof TaskManagerRoute
-  '/tasks-calendar': typeof TasksCalendarRoute
+  '/terminal': typeof TerminalRoute
   '/trips': typeof TripsRoute
+  '/trunk': typeof TrunkRoute
   '/tugas': typeof TugasRoute
   '/valuasi': typeof ValuasiRoute
+  '/vault': typeof VaultRoute
+  '/wallet': typeof WalletRoute
   '/water': typeof WaterRoute
   '/weather': typeof WeatherRoute
   '/workouts': typeof WorkoutsRoute
@@ -905,6 +959,7 @@ export interface FileRouteTypes {
     | '/grow'
     | '/habits'
     | '/health'
+    | '/home'
     | '/ideas'
     | '/improvement'
     | '/incoterms'
@@ -933,9 +988,11 @@ export interface FileRouteTypes {
     | '/passwords'
     | '/photography'
     | '/physical-commodities'
+    | '/pocket'
     | '/podcasts'
     | '/pomodoro'
     | '/portal'
+    | '/pouch'
     | '/profil'
     | '/proyek'
     | '/proyek-personal'
@@ -949,10 +1006,13 @@ export interface FileRouteTypes {
     | '/surety'
     | '/swot'
     | '/task-manager'
-    | '/tasks-calendar'
+    | '/terminal'
     | '/trips'
+    | '/trunk'
     | '/tugas'
     | '/valuasi'
+    | '/vault'
+    | '/wallet'
     | '/water'
     | '/weather'
     | '/workouts'
@@ -1002,6 +1062,7 @@ export interface FileRouteTypes {
     | '/grow'
     | '/habits'
     | '/health'
+    | '/home'
     | '/ideas'
     | '/improvement'
     | '/incoterms'
@@ -1030,8 +1091,10 @@ export interface FileRouteTypes {
     | '/passwords'
     | '/photography'
     | '/physical-commodities'
+    | '/pocket'
     | '/podcasts'
     | '/pomodoro'
+    | '/pouch'
     | '/profil'
     | '/proyek'
     | '/proyek-personal'
@@ -1045,10 +1108,13 @@ export interface FileRouteTypes {
     | '/surety'
     | '/swot'
     | '/task-manager'
-    | '/tasks-calendar'
+    | '/terminal'
     | '/trips'
+    | '/trunk'
     | '/tugas'
     | '/valuasi'
+    | '/vault'
+    | '/wallet'
     | '/water'
     | '/weather'
     | '/workouts'
@@ -1098,6 +1164,7 @@ export interface FileRouteTypes {
     | '/grow'
     | '/habits'
     | '/health'
+    | '/home'
     | '/ideas'
     | '/improvement'
     | '/incoterms'
@@ -1126,9 +1193,11 @@ export interface FileRouteTypes {
     | '/passwords'
     | '/photography'
     | '/physical-commodities'
+    | '/pocket'
     | '/podcasts'
     | '/pomodoro'
     | '/portal'
+    | '/pouch'
     | '/profil'
     | '/proyek'
     | '/proyek-personal'
@@ -1142,10 +1211,13 @@ export interface FileRouteTypes {
     | '/surety'
     | '/swot'
     | '/task-manager'
-    | '/tasks-calendar'
+    | '/terminal'
     | '/trips'
+    | '/trunk'
     | '/tugas'
     | '/valuasi'
+    | '/vault'
+    | '/wallet'
     | '/water'
     | '/weather'
     | '/workouts'
@@ -1196,6 +1268,7 @@ export interface RootRouteChildren {
   GrowRoute: typeof GrowRoute
   HabitsRoute: typeof HabitsRoute
   HealthRoute: typeof HealthRoute
+  HomeRoute: typeof HomeRoute
   IdeasRoute: typeof IdeasRoute
   ImprovementRoute: typeof ImprovementRoute
   IncotermsRoute: typeof IncotermsRoute
@@ -1224,9 +1297,11 @@ export interface RootRouteChildren {
   PasswordsRoute: typeof PasswordsRoute
   PhotographyRoute: typeof PhotographyRoute
   PhysicalCommoditiesRoute: typeof PhysicalCommoditiesRoute
+  PocketRoute: typeof PocketRoute
   PodcastsRoute: typeof PodcastsRoute
   PomodoroRoute: typeof PomodoroRoute
   PortalRoute: typeof PortalRouteWithChildren
+  PouchRoute: typeof PouchRoute
   ProfilRoute: typeof ProfilRoute
   ProyekRoute: typeof ProyekRoute
   ProyekPersonalRoute: typeof ProyekPersonalRoute
@@ -1240,10 +1315,13 @@ export interface RootRouteChildren {
   SuretyRoute: typeof SuretyRoute
   SwotRoute: typeof SwotRoute
   TaskManagerRoute: typeof TaskManagerRoute
-  TasksCalendarRoute: typeof TasksCalendarRoute
+  TerminalRoute: typeof TerminalRoute
   TripsRoute: typeof TripsRoute
+  TrunkRoute: typeof TrunkRoute
   TugasRoute: typeof TugasRoute
   ValuasiRoute: typeof ValuasiRoute
+  VaultRoute: typeof VaultRoute
+  WalletRoute: typeof WalletRoute
   WaterRoute: typeof WaterRoute
   WeatherRoute: typeof WeatherRoute
   WorkoutsRoute: typeof WorkoutsRoute
@@ -1469,6 +1547,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HealthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/home': {
+      id: '/home'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof HomeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/ideas': {
       id: '/ideas'
       path: '/ideas'
@@ -1665,6 +1750,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PhysicalCommoditiesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/pocket': {
+      id: '/pocket'
+      path: '/pocket'
+      fullPath: '/pocket'
+      preLoaderRoute: typeof PocketRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/podcasts': {
       id: '/podcasts'
       path: '/podcasts'
@@ -1684,6 +1776,13 @@ declare module '@tanstack/react-router' {
       path: '/portal'
       fullPath: '/portal'
       preLoaderRoute: typeof PortalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pouch': {
+      id: '/pouch'
+      path: '/pouch'
+      fullPath: '/pouch'
+      preLoaderRoute: typeof PouchRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/profil': {
@@ -1777,11 +1876,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TaskManagerRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/tasks-calendar': {
-      id: '/tasks-calendar'
-      path: '/tasks-calendar'
-      fullPath: '/tasks-calendar'
-      preLoaderRoute: typeof TasksCalendarRouteImport
+    '/terminal': {
+      id: '/terminal'
+      path: '/terminal'
+      fullPath: '/terminal'
+      preLoaderRoute: typeof TerminalRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/trips': {
@@ -1789,6 +1888,13 @@ declare module '@tanstack/react-router' {
       path: '/trips'
       fullPath: '/trips'
       preLoaderRoute: typeof TripsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/trunk': {
+      id: '/trunk'
+      path: '/trunk'
+      fullPath: '/trunk'
+      preLoaderRoute: typeof TrunkRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/tugas': {
@@ -1803,6 +1909,20 @@ declare module '@tanstack/react-router' {
       path: '/valuasi'
       fullPath: '/valuasi'
       preLoaderRoute: typeof ValuasiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vault': {
+      id: '/vault'
+      path: '/vault'
+      fullPath: '/vault'
+      preLoaderRoute: typeof VaultRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/wallet': {
+      id: '/wallet'
+      path: '/wallet'
+      fullPath: '/wallet'
+      preLoaderRoute: typeof WalletRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/water': {
@@ -1987,6 +2107,7 @@ const rootRouteChildren: RootRouteChildren = {
   GrowRoute: GrowRoute,
   HabitsRoute: HabitsRoute,
   HealthRoute: HealthRoute,
+  HomeRoute: HomeRoute,
   IdeasRoute: IdeasRoute,
   ImprovementRoute: ImprovementRoute,
   IncotermsRoute: IncotermsRoute,
@@ -2015,9 +2136,11 @@ const rootRouteChildren: RootRouteChildren = {
   PasswordsRoute: PasswordsRoute,
   PhotographyRoute: PhotographyRoute,
   PhysicalCommoditiesRoute: PhysicalCommoditiesRoute,
+  PocketRoute: PocketRoute,
   PodcastsRoute: PodcastsRoute,
   PomodoroRoute: PomodoroRoute,
   PortalRoute: PortalRouteWithChildren,
+  PouchRoute: PouchRoute,
   ProfilRoute: ProfilRoute,
   ProyekRoute: ProyekRoute,
   ProyekPersonalRoute: ProyekPersonalRoute,
@@ -2031,10 +2154,13 @@ const rootRouteChildren: RootRouteChildren = {
   SuretyRoute: SuretyRoute,
   SwotRoute: SwotRoute,
   TaskManagerRoute: TaskManagerRoute,
-  TasksCalendarRoute: TasksCalendarRoute,
+  TerminalRoute: TerminalRoute,
   TripsRoute: TripsRoute,
+  TrunkRoute: TrunkRoute,
   TugasRoute: TugasRoute,
   ValuasiRoute: ValuasiRoute,
+  VaultRoute: VaultRoute,
+  WalletRoute: WalletRoute,
   WaterRoute: WaterRoute,
   WeatherRoute: WeatherRoute,
   WorkoutsRoute: WorkoutsRoute,

@@ -91,9 +91,9 @@ function Launcher() {
           {pages.length > 0 ? pages.map((page, pageIdx) => (
             <div 
               key={pageIdx} 
-              className="w-full h-full shrink-0 snap-center flex-none px-4 sm:px-8 md:px-12 lg:px-24 pb-12 pt-8 overflow-y-auto flex flex-col items-center"
+              className="w-full h-full shrink-0 snap-center flex-none px-4 sm:px-8 md:px-12 lg:px-24 pb-12 pt-3 overflow-y-auto flex flex-col items-center"
             >
-              <h3 className="text-xl sm:text-2xl font-bold text-foreground/70 mb-8 tracking-tight">
+              <h3 className="text-xl sm:text-2xl font-bold text-foreground/70 mb-[52px] tracking-tight">
                 {page.title}
               </h3>
               <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-7 gap-x-4 gap-y-8 place-items-start max-w-6xl mx-auto w-full">
@@ -127,7 +127,7 @@ function Launcher() {
 
         {/* Pagination Dots */}
         {pages.length > 1 && (
-          <div className="absolute bottom-10 left-0 right-0 flex justify-center gap-2 pb-2">
+          <div className="absolute bottom-[60px] left-0 right-0 flex justify-center gap-2 pb-2">
             {pages.map((_, idx) => (
               <button
                 key={idx}

@@ -1,7 +1,7 @@
 import { useRef, useMemo } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { Target, LayoutDashboard, CalendarDays } from "lucide-react";
+import { Target, LayoutDashboard, CalendarDays, Home, Terminal } from "lucide-react";
 import { useFavorites } from "@/hooks/useFavorites";
 import { navKonsultan } from "@/config/nav";
 
@@ -77,10 +77,11 @@ export function AppDock() {
       return { id: favPath, label: favPath, icon: Target }; // Fallback
     });
     
-    // 2 tombol statis baru
+    // Tombol statis
     const staticItems = [
       { id: "/", label: "Launcher", icon: LayoutDashboard },
-      { id: "/tasks-calendar", label: "Kalender", icon: CalendarDays },
+      { id: "/home", label: "Beranda", icon: Home },
+      { id: "/terminal", label: "Terminal", icon: Terminal },
     ];
     
     // Hilangkan duplikasi jika ternyata tombol statis sudah ada di favorit
@@ -96,7 +97,7 @@ export function AppDock() {
       <motion.div
         onMouseMove={(e) => mouseX.set(e.pageX)}
         onMouseLeave={() => mouseX.set(Infinity)}
-        className="flex items-end gap-3 px-4 pb-3 h-16 rounded-3xl bg-white/40 backdrop-blur-xl border border-neutral-200/50 shadow-lg"
+        className="flex items-end gap-3 px-4 pb-3 h-16 rounded-3xl bg-white/10 backdrop-blur-[30px] border border-white/20 shadow-[0px_4px_21px_-8px_rgba(255,255,255,0.3)] liquid-glass-dock"
       >
         {dockItems.map((item) => {
           const isActive = pathname === item.id || (item.id !== "/" && pathname.startsWith(item.id));

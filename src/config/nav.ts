@@ -78,6 +78,10 @@ import {
   ScrollText,
   Binary,
   Info,
+  Pocket,
+  Vault,
+  Luggage,
+  ShoppingBag,
   type LucideIcon,
 } from "lucide-react";
 
@@ -94,15 +98,10 @@ export type NavGroup = {
 
 export const navKonsultan: NavGroup[] = [
   {
-    title: "100 Things",
+    title: "Tahapan",
     items: [
       { to: "/100-framework", label: "100 Framework", icon: Grid2X2 },
       { to: "/100-komoditas", label: "100 Komoditas", icon: Package },
-    ],
-  },
-  {
-    title: "Tahapan",
-    items: [
       { to: "/reliance", label: "Reliance", icon: ShieldCheck },
       { to: "/sufficent", label: "Sufficent", icon: CheckCircle2 },
       { to: "/improvement", label: "Improvement", icon: TrendingUp },
@@ -112,8 +111,10 @@ export const navKonsultan: NavGroup[] = [
   {
     title: "Proyek",
     items: [
-      { to: "/proyek", label: "Daftar Proyek", icon: FolderKanban },
-      { to: "/klien", label: "Klien & Kontak", icon: Users },
+      { to: "/proyek", label: "Proyek & Tugas", icon: FolderKanban },
+      { to: "/proyek-personal", label: "Personal Projects", icon: Briefcase },
+      { to: "/countdown", label: "Countdown", icon: Timer },
+      { to: "/katalog-produk", label: "Katalog Produk", icon: Package },
       { to: "/reports", label: "Laporan Khusus", icon: NotebookText },
     ],
   },
@@ -133,11 +134,11 @@ export const navKonsultan: NavGroup[] = [
   {
     title: "Productivity",
     items: [
+      { to: "/kalender", label: "Kalender & Timeline", icon: CalendarDays },
       { to: "/task-manager", label: "Task Manager", icon: CheckSquare },
       { to: "/pomodoro", label: "Pomodoro Timer", icon: Timer },
       { to: "/eisenhower", label: "Eisenhower Matrix", icon: Grid2X2 },
       { to: "/incoterms", label: "Panduan Incoterms", icon: Navigation },
-      { to: "/tasks-calendar", label: "Tasks Calendar & Timeline", icon: CalendarClock },
     ],
   },
   {
@@ -216,15 +217,86 @@ export const navKonsultan: NavGroup[] = [
   {
     title: "Syariah & Muamalah",
     items: [
-      { to: "/syariah", label: "Fiqih Muamalah", icon: HeartHandshake },
+      { to: "/syariah", label: "Pasar Muamalah", icon: HeartHandshake },
+      { to: "/syariah/indeks", label: "Indeks Sharia", icon: LineChart },
+      { to: "/syariah/terlarang", label: "Transaksi Terlarang", icon: AlertTriangle },
+      { to: "/syariah/akad", label: "Akad Syariah", icon: FileText },
+      { to: "/syariah/asuransi", label: "Asuransi Syariah", icon: Shield },
       { to: "/zakat", label: "Kalkulator Zakat", icon: Calculator },
+    ],
+  },
+  {
+    title: "Education",
+    items: [
+      { to: "/courses", label: "Courses", icon: GraduationCap },
+      { to: "/flashcards", label: "Flashcards", icon: Layers },
+      { to: "/exams", label: "Exams", icon: FileCheck },
+      { to: "/languages", label: "Languages", icon: Globe },
+      { to: "/reading", label: "Reading List", icon: Book },
+    ],
+  },
+  {
+    title: "Wellbeing",
+    items: [
+      { to: "/health", label: "Health", icon: Heart },
+      { to: "/workouts", label: "Workouts", icon: Dumbbell },
+      { to: "/water", label: "Water Tracker", icon: Droplet },
+    ],
+  },
+  {
+    title: "Memos",
+    items: [
+      { to: "/notes", label: "Notes & Docs", icon: FileText },
+      { to: "/catatan", label: "Catatan", icon: NotebookText },
+      { to: "/ideas", label: "Ideas", icon: Lightbulb },
+      { to: "/journal", label: "Journal", icon: BookOpen },
+    ],
+  },
+  {
+    title: "Personal",
+    items: [
+      { to: "/wallet", label: "Wallet", icon: Wallet },
+      { to: "/pocket", label: "Pocket", icon: Pocket },
+      { to: "/pouch", label: "Pouch", icon: ShoppingBag },
+      { to: "/vault", label: "Vault", icon: Vault },
+      { to: "/trunk", label: "Trunk", icon: Luggage },
+      { to: "/contacts", label: "Kontak", icon: Users },
+      { to: "/goals", label: "Goals", icon: Target },
+      { to: "/habits", label: "Habits", icon: Activity },
+      { to: "/passwords", label: "Passwords", icon: Key },
+      { to: "/inventory", label: "Inventory", icon: Archive },
+    ],
+  },
+  {
+    title: "Lifestyle",
+    items: [
+      { to: "/recipes", label: "Recipes", icon: Utensils },
+      { to: "/shopping", label: "Shopping List", icon: ShoppingCart },
+      { to: "/trips", label: "Trips", icon: Plane },
+    ],
+  },
+  {
+    title: "Entertainment",
+    items: [
+      { to: "/movies", label: "Movies", icon: Film },
+      { to: "/games", label: "Games", icon: Gamepad2 },
+      { to: "/podcasts", label: "Podcasts", icon: Podcast },
+      { to: "/music", label: "Music", icon: Music },
+    ],
+  },
+  {
+    title: "Creativity",
+    items: [
+      { to: "/design", label: "Design", icon: PenTool },
+      { to: "/photography", label: "Photography", icon: Camera },
+      { to: "/writing", label: "Writing", icon: Type },
+      { to: "/code", label: "Code", icon: Code },
     ],
   },
   {
     title: "Lain-lain",
     items: [
       { to: "/kalkulator", label: "Kalkulator Umum", icon: Calculator },
-      { to: "/water", label: "Water Tracker", icon: Droplet },
     ],
   },
 ];
