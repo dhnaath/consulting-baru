@@ -10,7 +10,7 @@ import {
   Check,
 } from "lucide-react";
 
-export function SufficentView() {
+export function SufficientView() {
   const [monthlyExpense, setMonthlyExpense] = useState(45000000);
   const [monthlyRevenue, setMonthlyRevenue] = useState(68000000);
   const [reserveFund, setReserveFund] = useState(270000000);
@@ -74,7 +74,7 @@ export function SufficentView() {
             <span>Fase 2 · Kecukupan & Kemandirian</span>
           </div>
           <h2 className="text-2xl font-bold tracking-tight text-foreground">
-            Sufficent Framework
+            Sufficient Framework
           </h2>
           <p className="text-sm text-muted-foreground mt-1 max-w-2xl">
             Mencapai titik kecukupan mutlak: arus kas positif stabil, dana cadangan berimbang, dan sistem dapat mencukupi kebutuhannya sendiri tanpa bergantung pada sokongan darurat.

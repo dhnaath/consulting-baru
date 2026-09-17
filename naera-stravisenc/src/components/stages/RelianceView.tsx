@@ -148,7 +148,7 @@ export function RelianceView() {
               Tahap 1 Lolos
             </span>
           </div>
-          <span className="text-xs text-muted-foreground mt-2">Siap menuju Sufficent</span>
+          <span className="text-xs text-muted-foreground mt-2">Siap menuju Sufficient</span>
         </div>
       </div>
 
@@ -272,7 +272,7 @@ export function RelianceView() {
             </h3>
             <p className="text-xs text-muted-foreground leading-relaxed">
               Setelah seluruh fondasi ketergantungan terlindungi, lanjutkan ke tahap berikutnya:{" "}
-              <strong className="text-foreground">Sufficent</strong> untuk memastikan ambang kecukupan arus kas dan kemandirian operasional tercapai.
+              <strong className="text-foreground">Sufficient</strong> untuk memastikan ambang kecukupan arus kas dan kemandirian operasional tercapai.
             </p>
           </div>
         </div>

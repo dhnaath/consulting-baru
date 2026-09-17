@@ -5,6 +5,7 @@ import {
   PanelLeft,
   PanelRight,
   LayoutDashboard,
+  Terminal,
   Users,
   FolderKanban,
   CheckSquare,
@@ -179,7 +180,37 @@ export function AppShell({
     ? findItemById(customIdParam)
     : findItemByPath(fullPath);
 
-  const nav = rawNav
+  const overviewGroup = rawNav.find((g) => g.title === "Overview");
+  
+  // Ambil item dari Overview tapi KECUALIKAN 4 item spesifik ini
+  const specificUrls = ["/insider", "/insight", "/outward", "/outlook"];
+  const remainingOverviewItems = overviewGroup 
+    ? overviewGroup.items.filter((i) => i.to !== "/" && !specificUrls.includes(i.to)) 
+    : [];
+
+  const sidebarNav: NavGroupType[] = [
+    {
+      title: "",
+      items: [
+        { to: "/", label: "Launcher", icon: LayoutDashboard },
+        { to: "/terminal", label: "Terminal", icon: Terminal },
+        { to: "/insider", label: "Insider", icon: Eye },
+        { to: "/insight", label: "Insight", icon: Lightbulb },
+        { to: "/outward", label: "Outward", icon: Compass },
+        { to: "/outlook", label: "Outlook", icon: TrendingUp },
+        { to: "/reliance", label: "Reliance", icon: ShieldCheck },
+        { to: "/sufficient", label: "Sufficient", icon: CheckCircle2 },
+        { to: "/improvement", label: "Improvement", icon: TrendingUp },
+        { to: "/development", label: "Development", icon: Sparkles },
+      ],
+    },
+    {
+      title: "Overview",
+      items: remainingOverviewItems,
+    },
+  ];
+
+  const nav = sidebarNav
     .map((group) => ({
       ...group,
       items: group.items.filter((item) => enabledMenus[item.to] !== false),
@@ -189,7 +220,10 @@ export function AppShell({
   let categoryName = "Umum";
   let categoryGroup: { title?: string; items?: readonly any[] | any[] } | undefined = rawNav[0];
 
-  if (customMatch && (pathname === "/lainnya" || customMatch.item.path === fullPath)) {
+  if (pathname === "/") {
+    categoryName = "Umum";
+    categoryGroup = undefined;
+  } else if (customMatch && (pathname === "/lainnya" || customMatch.item.path === fullPath)) {
     categoryName = customMatch.category.title;
     categoryGroup = {
       title: customMatch.category.title,
@@ -489,10 +523,12 @@ export function AppShell({
                 <HeaderBreadcrumb
                   className="text-xs"
                   segments={
-                    pathname === "/home" || pathname === "/"
-                      ? [{ label: "Home", href: pathname }]
+                    pathname === "/home"
+                      ? [
+                          { label: "Home", href: "/home" }
+                        ]
                       : [
-                          { label: "Home", href: "/" },
+                          { label: "Home", href: "/home" },
                           ...(categoryName && categoryName !== "Umum"
                             ? [
                                 {
@@ -534,7 +570,6 @@ export function AppShell({
                 aria-label="Notifications"
               >
                 <Bell className="size-5 shrink-0" />
-                <span className="absolute right-2 top-2 flex h-2 w-2 rounded-full bg-red-500 ring-2 ring-background"></span>
               </button>
 
               <div className="relative">

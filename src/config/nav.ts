@@ -102,10 +102,6 @@ export const navKonsultan: NavGroup[] = [
     items: [
       { to: "/100-framework", label: "100 Framework", icon: Grid2X2 },
       { to: "/100-komoditas", label: "100 Komoditas", icon: Package },
-      { to: "/reliance", label: "Reliance", icon: ShieldCheck },
-      { to: "/sufficent", label: "Sufficent", icon: CheckCircle2 },
-      { to: "/improvement", label: "Improvement", icon: TrendingUp },
-      { to: "/development", label: "Development", icon: Sparkles },
     ],
   },
   {
@@ -121,7 +117,6 @@ export const navKonsultan: NavGroup[] = [
   {
     title: "Overview",
     items: [
-      { to: "/", label: "Launcher", icon: LayoutDashboard },
       { to: "/insider", label: "Insider", icon: Eye },
       { to: "/insight", label: "Insight", icon: Lightbulb },
       { to: "/outward", label: "Outward", icon: Compass },

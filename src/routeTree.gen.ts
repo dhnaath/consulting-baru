@@ -82,7 +82,7 @@ import { Route as RecipesRouteImport } from './routes/recipes'
 import { Route as RelianceRouteImport } from './routes/reliance'
 import { Route as ShoppingRouteImport } from './routes/shopping'
 import { Route as SubscriptionsRouteImport } from './routes/subscriptions'
-import { Route as SufficentRouteImport } from './routes/sufficent'
+import { Route as SufficientRouteImport } from './routes/sufficient'
 import { Route as SuretyRouteImport } from './routes/surety'
 import { Route as SwotRouteImport } from './routes/swot'
 import { Route as TaskManagerRouteImport } from './routes/task-manager'
@@ -476,9 +476,9 @@ const SubscriptionsRoute = SubscriptionsRouteImport.update({
   path: '/subscriptions',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SufficentRoute = SufficentRouteImport.update({
-  id: '/sufficent',
-  path: '/sufficent',
+const SufficientRoute = SufficientRouteImport.update({
+  id: '/sufficient',
+  path: '/sufficient',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SuretyRoute = SuretyRouteImport.update({
@@ -691,7 +691,7 @@ export interface FileRoutesByFullPath {
   '/reliance': typeof RelianceRoute
   '/shopping': typeof ShoppingRoute
   '/subscriptions': typeof SubscriptionsRoute
-  '/sufficent': typeof SufficentRoute
+  '/sufficient': typeof SufficientRoute
   '/surety': typeof SuretyRoute
   '/swot': typeof SwotRoute
   '/task-manager': typeof TaskManagerRoute
@@ -793,7 +793,7 @@ export interface FileRoutesByTo {
   '/reliance': typeof RelianceRoute
   '/shopping': typeof ShoppingRoute
   '/subscriptions': typeof SubscriptionsRoute
-  '/sufficent': typeof SufficentRoute
+  '/sufficient': typeof SufficientRoute
   '/surety': typeof SuretyRoute
   '/swot': typeof SwotRoute
   '/task-manager': typeof TaskManagerRoute
@@ -897,7 +897,7 @@ export interface FileRoutesById {
   '/reliance': typeof RelianceRoute
   '/shopping': typeof ShoppingRoute
   '/subscriptions': typeof SubscriptionsRoute
-  '/sufficent': typeof SufficentRoute
+  '/sufficient': typeof SufficientRoute
   '/surety': typeof SuretyRoute
   '/swot': typeof SwotRoute
   '/task-manager': typeof TaskManagerRoute
@@ -1002,7 +1002,7 @@ export interface FileRouteTypes {
     | '/reliance'
     | '/shopping'
     | '/subscriptions'
-    | '/sufficent'
+    | '/sufficient'
     | '/surety'
     | '/swot'
     | '/task-manager'
@@ -1104,7 +1104,7 @@ export interface FileRouteTypes {
     | '/reliance'
     | '/shopping'
     | '/subscriptions'
-    | '/sufficent'
+    | '/sufficient'
     | '/surety'
     | '/swot'
     | '/task-manager'
@@ -1207,7 +1207,7 @@ export interface FileRouteTypes {
     | '/reliance'
     | '/shopping'
     | '/subscriptions'
-    | '/sufficent'
+    | '/sufficient'
     | '/surety'
     | '/swot'
     | '/task-manager'
@@ -1311,7 +1311,7 @@ export interface RootRouteChildren {
   RelianceRoute: typeof RelianceRoute
   ShoppingRoute: typeof ShoppingRoute
   SubscriptionsRoute: typeof SubscriptionsRoute
-  SufficentRoute: typeof SufficentRoute
+  SufficientRoute: typeof SufficientRoute
   SuretyRoute: typeof SuretyRoute
   SwotRoute: typeof SwotRoute
   TaskManagerRoute: typeof TaskManagerRoute
@@ -1848,11 +1848,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SubscriptionsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/sufficent': {
-      id: '/sufficent'
-      path: '/sufficent'
-      fullPath: '/sufficent'
-      preLoaderRoute: typeof SufficentRouteImport
+    '/sufficient': {
+      id: '/sufficient'
+      path: '/sufficient'
+      fullPath: '/sufficient'
+      preLoaderRoute: typeof SufficientRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/surety': {
@@ -2150,7 +2150,7 @@ const rootRouteChildren: RootRouteChildren = {
   RelianceRoute: RelianceRoute,
   ShoppingRoute: ShoppingRoute,
   SubscriptionsRoute: SubscriptionsRoute,
-  SufficentRoute: SufficentRoute,
+  SufficientRoute: SufficientRoute,
   SuretyRoute: SuretyRoute,
   SwotRoute: SwotRoute,
   TaskManagerRoute: TaskManagerRoute,
